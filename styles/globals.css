@@ -122,4 +122,21 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Global Clickable Surface Policy */
+  button,
+  a,
+  role[button],
+  [onclick],
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  /* Specific Radix/Shadcn UI overrides */
+  [data-radix-collection-item],
+  [role='menuitem'],
+  [role='tab'],
+  [role='option'] {
+    cursor: pointer !important;
+  }
 }
