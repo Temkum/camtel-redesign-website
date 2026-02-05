@@ -86,7 +86,6 @@ export function DashboardHeader() {
                   size="sm"
                   className="gap-1.5 text-muted-foreground transition-all duration-200 hover:text-foreground"
                 >
-                  s
                   <Globe className="h-4 w-4" />
                   <span className="hidden sm:inline">
                     {language === 'en' ? 'English' : 'Francais'}

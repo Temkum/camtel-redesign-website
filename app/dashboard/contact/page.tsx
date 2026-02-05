@@ -25,7 +25,6 @@ import {
   Settings,
   MessageSquare,
 } from 'lucide-react';
-import { LanguageProvider } from '@/lib/language-context';
 
 const faqCategories = [
   { id: 'all', name: 'All', icon: HelpCircle, count: 16 },
