@@ -1,18 +1,29 @@
-"use client"
+'use client';
 
-import { ArrowRight, Wifi, Signal, Zap } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useLanguage } from "@/lib/language-context"
+import {
+  ArrowRight,
+  Wifi,
+  Signal,
+  Zap,
+  Laptop,
+  Smartphone,
+  Car,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/lib/language-context';
 
 export function HeroSection() {
-  const { t } = useLanguage()
+  const { t } = useLanguage();
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 py-16 sm:py-24 lg:py-32">
       {/* Animated Background Elements */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-4 top-1/4 h-72 w-72 animate-pulse rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute -right-4 bottom-1/4 h-96 w-96 animate-pulse rounded-full bg-accent/10 blur-3xl" style={{ animationDelay: "1s" }} />
+        <div
+          className="absolute -right-4 bottom-1/4 h-96 w-96 animate-pulse rounded-full bg-accent/10 blur-3xl"
+          style={{ animationDelay: '1s' }}
+        />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -25,11 +36,11 @@ export function HeroSection() {
             </div>
 
             <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              {t("heroTitle")}
+              {t('heroTitle')}
             </h1>
 
             <p className="max-w-lg text-pretty text-lg leading-relaxed text-muted-foreground">
-              {t("heroSubtitle")}
+              {t('heroSubtitle')}
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row">
@@ -37,7 +48,7 @@ export function HeroSection() {
                 size="lg"
                 className="group gap-2 bg-primary px-8 text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25"
               >
-                {t("exploreProducts")}
+                {t('exploreProducts')}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button
@@ -45,7 +56,7 @@ export function HeroSection() {
                 variant="outline"
                 className="border-border px-8 transition-all duration-300 hover:border-primary hover:text-primary bg-transparent"
               >
-                {t("contactUs")}
+                {t('contactUs')}
               </Button>
             </div>
 
@@ -70,9 +81,21 @@ export function HeroSection() {
           <div className="relative hidden lg:block">
             <div className="relative mx-auto aspect-square max-w-md">
               {/* Animated Rings */}
-              <div className="absolute inset-0 animate-spin rounded-full border-2 border-dashed border-primary/20" style={{ animationDuration: "20s" }} />
-              <div className="absolute inset-8 animate-spin rounded-full border-2 border-dashed border-accent/20" style={{ animationDuration: "15s", animationDirection: "reverse" }} />
-              <div className="absolute inset-16 animate-spin rounded-full border-2 border-dashed border-primary/30" style={{ animationDuration: "10s" }} />
+              <div
+                className="absolute inset-0 animate-spin rounded-full border-2 border-dashed border-primary/20"
+                style={{ animationDuration: '20s' }}
+              />
+              <div
+                className="absolute inset-8 animate-spin rounded-full border-2 border-dashed border-accent/20"
+                style={{
+                  animationDuration: '15s',
+                  animationDirection: 'reverse',
+                }}
+              />
+              <div
+                className="absolute inset-16 animate-spin rounded-full border-2 border-dashed border-primary/30"
+                style={{ animationDuration: '10s' }}
+              />
 
               {/* Center Icon */}
               <div className="absolute inset-0 flex items-center justify-center">
@@ -82,16 +105,42 @@ export function HeroSection() {
               </div>
 
               {/* Floating Icons */}
-              <div className="absolute left-4 top-1/4 flex h-12 w-12 animate-bounce items-center justify-center rounded-xl bg-card shadow-lg" style={{ animationDuration: "3s" }}>
-                <Signal className="h-6 w-6 text-primary" />
-              </div>
-              <div className="absolute bottom-1/4 right-4 flex h-12 w-12 animate-bounce items-center justify-center rounded-xl bg-card shadow-lg" style={{ animationDuration: "2.5s", animationDelay: "0.5s" }}>
-                <Zap className="h-6 w-6 text-accent" />
+              <div className="absolute inset-0">
+                {/* Smartphone - Top Right */}
+                <div
+                  className="absolute right-4 top-1/4 flex h-12 w-12 animate-bounce items-center justify-center rounded-xl bg-card shadow-lg"
+                  style={{ animationDuration: '3s' }}
+                >
+                  <Smartphone className="h-6 w-6 text-primary" />
+                </div>
+
+                {/* Laptop - Bottom Left */}
+                <div
+                  className="absolute left-4 bottom-1/4 flex h-14 w-14 animate-bounce items-center justify-center rounded-xl bg-card shadow-lg"
+                  style={{ animationDuration: '3.5s', animationDelay: '0.2s' }}
+                >
+                  <Laptop className="h-7 w-7 text-accent" />
+                </div>
+
+                {/* Tablet - Top Left */}
+                <div
+                  className="absolute left-8 top-12 flex h-10 w-10 animate-bounce items-center justify-center rounded-xl bg-card shadow-lg"
+                  style={{ animationDuration: '4s', animationDelay: '0.7s' }}
+                >
+                  <Car className="h-5 w-5 text-primary" />
+                </div>
+
+                <div
+                  className="absolute right-12 bottom-8 flex h-12 w-12 animate-bounce items-center justify-center rounded-xl bg-card shadow-lg"
+                  style={{ animationDuration: '2.5s', animationDelay: '0.5s' }}
+                >
+                  <Signal className="h-6 w-6 text-accent" />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
