@@ -25,6 +25,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
+import { useActivePath } from '@/app/hooks/use-active-path';
 
 const navigation = [
   { name: 'Home', href: '/dashboard', icon: Home },
@@ -36,17 +37,18 @@ const navigation = [
 export function DashboardHeader() {
   const pathname = usePathname();
   const { language, setLanguage, t } = useLanguage();
+  const { checkActive } = useActivePath();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-card shadow-sm">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         {/* Logo */}
-        <Link href="/dashboard" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
             <Globe className="h-6 w-6 text-primary-foreground" />
           </div>
           <div className="hidden md:block">
-            <span className="text-xl font-bold text-primary">camtel</span>
+            <span className="text-xl font-bold text-primary">Camtel</span>
             <p className="text-xs text-muted-foreground">
               ...Et ce n'est pas fini!
             </p>
@@ -55,24 +57,20 @@ export function DashboardHeader() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1">
-          {navigation.map((item) => {
-            const isActive =
-              pathname === item.href || pathname.startsWith(item.href + '/');
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  'px-4 py-2 text-sm font-medium rounded-md transition-colors',
-                  isActive
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-foreground hover:bg-secondary'
-                )}
-              >
-                {item.name}
-              </Link>
-            );
-          })}
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={cn(
+                'px-4 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer',
+                checkActive(item.href)
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-foreground hover:bg-secondary'
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
         </nav>
 
         {/* Right Section */}
@@ -99,13 +97,21 @@ export function DashboardHeader() {
               >
                 <DropdownMenuItem
                   onClick={() => setLanguage('en')}
-                  className={language === 'en' ? 'bg-secondary' : ''}
+                  className={
+                    language === 'en'
+                      ? 'bg-secondary cursor-pointer'
+                      : 'cursor-pointer'
+                  }
                 >
                   English
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => setLanguage('fr')}
-                  className={language === 'fr' ? 'bg-secondary' : ''}
+                  className={
+                    language === 'fr'
+                      ? 'bg-secondary cursor-pointer'
+                      : 'cursor-pointer'
+                  }
                 >
                   Francais
                 </DropdownMenuItem>
@@ -190,7 +196,16 @@ export function DashboardHeader() {
                 </nav>
                 <div className="mt-auto pt-4 border-t border-border">
                   <div className="flex items-center gap-2 px-3 text-sm">
-                    <button className="hover:text-primary">English</button>
+                    <button
+                      onClick={() => setLanguage('fr')}
+                      className={
+                        language === 'fr'
+                          ? 'text-blue-500 hover:text-primary'
+                          : ''
+                      }
+                    >
+                      English
+                    </button>
                     <span>|</span>
                     <button className="hover:text-primary">French</button>
                   </div>

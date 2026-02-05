@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
+import { LanguageProvider } from '@/lib/language-context';
+import { DashboardHeader } from '@/components/dashboard/header';
 
 const _geist = Geist({ subsets: ['latin'] });
 const _geistMono = Geist_Mono({ subsets: ['latin'] });
@@ -10,7 +12,7 @@ const _geistMono = Geist_Mono({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Camtel - Customer Portal',
   description:
-    'Manage your Camtel Xtremnet internet services - account, billing, and support',
+    'Manage your Camtel X-tremNet internet services - account, billing, and support',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -39,8 +41,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
-        {children}
-        <Analytics />
+        <LanguageProvider>
+          <DashboardHeader />
+          {children}
+          <Analytics />
+        </LanguageProvider>
       </body>
     </html>
   );

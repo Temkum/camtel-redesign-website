@@ -1,7 +1,7 @@
 'use client';
 
 import { LanguageProvider } from '@/lib/language-context';
-import { Header } from '@/components/header';
+// import { Header } from '@/components/header';
 import { HeroSection } from '@/components/hero-section';
 import { UserSection } from '@/components/user-section';
 import { ProductSection } from '@/components/product-section';
