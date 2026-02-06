@@ -25,7 +25,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
-import { useActivePath } from '@/app/hooks/use-active-path';
+import { useActivePath } from '@/hooks/use-active-path';
 
 const navigation = [
   { name: 'Home', href: '/dashboard', icon: Home },

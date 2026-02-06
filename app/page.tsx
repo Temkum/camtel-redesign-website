@@ -2,10 +2,10 @@
 
 import { LanguageProvider } from '@/lib/language-context';
 // import { Header } from '@/components/header';
-import { HeroSection } from '@/components/hero-section';
-import { UserSection } from '@/components/user-section';
-import { ProductSection } from '@/components/product-section';
-import { ContactSection } from '@/components/contact-section';
+import { HeroSection } from '@/components/sections/hero-section';
+import { UserSection } from '@/components/sections/user-section';
+import { ProductSection } from '@/components/sections/product-section';
+import { ContactSection } from '@/components/sections/contact-section';
 import { Footer } from '@/components/footer';
 
 export default function Home() {

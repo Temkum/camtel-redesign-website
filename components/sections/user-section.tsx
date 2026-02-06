@@ -14,6 +14,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/lib/language-context';
+import { useAuth } from '@/lib/auth-context';
 
 export function UserSection() {
   const { t } = useLanguage();
