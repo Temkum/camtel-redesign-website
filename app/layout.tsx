@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { LanguageProvider } from '@/lib/language-context';
 import { DashboardHeader } from '@/components/dashboard/header';
+import { AuthProvider } from '@/lib/auth-context';
 
 const _geist = Geist({ subsets: ['latin'] });
 const _geistMono = Geist_Mono({ subsets: ['latin'] });
@@ -42,9 +43,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans antialiased`}>
         <LanguageProvider>
-          <DashboardHeader />
-          {children}
-          <Analytics />
+          <AuthProvider>
+            <DashboardHeader />
+            {children}
+            <Analytics />
+          </AuthProvider>
         </LanguageProvider>
       </body>
     </html>

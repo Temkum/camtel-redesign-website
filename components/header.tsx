@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/lib/language-context';
+import { AuthButton } from '@/components/auth/auth-button';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -56,6 +57,9 @@ export function Header() {
 
         {/* Right Section */}
         <div className="flex items-center gap-2">
+          {/* Auth Button */}
+          <AuthButton />
+
           {/* Language Switcher */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

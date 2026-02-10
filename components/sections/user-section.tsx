@@ -15,16 +15,19 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/lib/language-context';
 import { useAuth } from '@/lib/auth-context';
+import LoginModal from '@/app/login/page';
 
 export function UserSection() {
   const { t } = useLanguage();
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const { user, login, logout, isLoading } = useAuth();
 
   const loggedUser = { name: 'KUM JUDE THADDEUS TEM', service: '620779967' };
 
   // Dummy data state - set to null to see "Not Logged In" state
-  const [user, setUser] = useState<{ name: string; service: string } | null>(
-    null
-  );
+  // const [user, setUser] = useState<{ name: string; service: string } | null>(
+  //   null
+  // );
 
   const quickActions = [
     { icon: Receipt, label: 'viewBills', color: 'text-primary' },
@@ -33,97 +36,109 @@ export function UserSection() {
   ];
 
   return (
-    <section className="py-12 sm:py-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6 lg:grid-cols-3">
-          {/* User Welcome / Login Card */}
-          <Card className="overflow-hidden border-border/50 bg-card shadow-sm transition-all duration-300 hover:shadow-md lg:col-span-1">
-            {user ? (
-              <>
-                <CardHeader className="border-b border-border/50 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-foreground/20">
-                      <User className="h-6 w-6" />
+    <>
+      <section className="py-12 sm:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-6 lg:grid-cols-3">
+            {/* User Welcome / Login Card */}
+            <Card className="overflow-hidden border-border/50 bg-card shadow-sm transition-all duration-300 hover:shadow-md lg:col-span-1">
+              {user ? (
+                <>
+                  <CardHeader className="border-b border-border/50 bg-linear-to-r from-primary to-primary/80 text-primary-foreground">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-foreground/20">
+                        <User className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <p className="text-sm opacity-90">{t('welcome')},</p>
+                        <CardTitle className="text-lg uppercase">
+                          {user.name}
+                        </CardTitle>
+                        <p className="text-xs opacity-80">
+                          Ref: {user.serviceId}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm opacity-90">{t('welcome')},</p>
-                      <CardTitle className="text-lg uppercase">
-                        {user.name}
-                      </CardTitle>
-                      <p className="text-xs opacity-80">Ref: {user.service}</p>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <div className="flex flex-col">
+                      <button className="flex items-center gap-3 px-6 py-4 text-left text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground">
+                        <FileText className="h-4 w-4" />
+                        {t('customerInfo')}
+                      </button>
+                      <button className="flex items-center gap-3 border-t border-border/50 px-6 py-4 text-left text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground">
+                        <Lock className="h-4 w-4" />
+                        {t('changePassword')}
+                      </button>
+                      <button
+                        onClick={logout}
+                        className="flex items-center gap-3 border-t border-border/50 px-6 py-4 text-left text-sm font-medium text-destructive transition-all duration-200 hover:bg-destructive/10"
+                      >
+                        <LogOut className="h-4 w-4" />
+                        {t('logout')}
+                      </button>
                     </div>
+                  </CardContent>
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center p-8 text-center space-y-4">
+                  <div className="rounded-full bg-secondary p-4">
+                    <User className="h-8 w-8 text-muted-foreground" />
                   </div>
-                </CardHeader>
-                <CardContent className="p-0">
-                  <div className="flex flex-col">
-                    <button className="flex items-center gap-3 px-6 py-4 text-left text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground">
-                      <FileText className="h-4 w-4" />
-                      {t('customerInfo')}
-                    </button>
-                    <button className="flex items-center gap-3 border-t border-border/50 px-6 py-4 text-left text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground">
-                      <Lock className="h-4 w-4" />
-                      {t('changePassword')}
-                    </button>
-                    <button
-                      onClick={() => setUser(null)}
-                      className="flex items-center gap-3 border-t border-border/50 px-6 py-4 text-left text-sm font-medium text-destructive transition-all duration-200 hover:bg-destructive/10"
-                    >
-                      <LogOut className="h-4 w-4" />
-                      {t('logout')}
-                    </button>
+                  <div className="space-y-2">
+                    <h3 className="font-semibold text-lg">
+                      {t('notLoggedIn')}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      Access your account to manage services
+                    </p>
                   </div>
-                </CardContent>
-              </>
-            ) : (
-              <div className="flex flex-col items-center justify-center p-8 text-center space-y-4">
-                <div className="rounded-full bg-secondary p-4">
-                  <User className="h-8 w-8 text-muted-foreground" />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-lg">{t('notLoggedIn')}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Access your account to manage services
-                  </p>
-                </div>
-                <Button className="w-full gap-2" variant="default">
-                  <LogIn className="h-4 w-4" />
-                  {t('login')}
-                </Button>
-              </div>
-            )}
-          </Card>
-
-          {/* Quick Actions (Remains visible or can be disabled/blurred if preferred) */}
-          <Card className="border-border/50 bg-card shadow-sm transition-all duration-300 hover:shadow-md lg:col-span-2">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-foreground">
-                {t('quickActions')}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-4 sm:grid-cols-3">
-                {quickActions.map((action) => (
                   <Button
-                    key={action.label}
-                    variant="outline"
-                    disabled={!user}
-                    className="group flex h-auto flex-col items-center gap-3 border-border/50 p-6 transition-all duration-300 hover:border-primary hover:bg-primary/5 bg-transparent"
+                    className="w-full gap-2"
+                    variant="default"
+                    onClick={() => setIsLoginOpen(true)}
                   >
-                    <div
-                      className={`rounded-xl bg-secondary p-3 transition-colors group-hover:bg-primary/10 ${action.color}`}
-                    >
-                      <action.icon className="h-6 w-6" />
-                    </div>
-                    <span className="text-sm font-medium text-foreground">
-                      {t(action.label)}
-                    </span>
+                    <LogIn className="h-4 w-4" />
+                    {t('login')}
                   </Button>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                </div>
+              )}
+            </Card>
+
+            {/* Quick Actions (Remains visible or can be disabled/blurred if preferred) */}
+            <Card className="border-border/50 bg-card shadow-sm transition-all duration-300 hover:shadow-md lg:col-span-2">
+              <CardHeader>
+                <CardTitle className="text-lg font-semibold text-foreground">
+                  {t('quickActions')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-3">
+                  {quickActions.map((action) => (
+                    <Button
+                      key={action.label}
+                      variant="outline"
+                      disabled={!user}
+                      className="group flex h-auto flex-col items-center gap-3 border-border/50 p-6 transition-all duration-300 hover:border-primary hover:bg-primary/5 bg-transparent"
+                    >
+                      <div
+                        className={`rounded-xl bg-secondary p-3 transition-colors group-hover:bg-primary/10 ${action.color}`}
+                      >
+                        <action.icon className="h-6 w-6" />
+                      </div>
+                      <span className="text-sm font-medium text-foreground">
+                        {t(action.label)}
+                      </span>
+                    </Button>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+    </>
   );
 }
