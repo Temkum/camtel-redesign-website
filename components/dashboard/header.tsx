@@ -49,7 +49,7 @@ export function DashboardHeader() {
           <img
             src="/camtel.png"
             alt="Camtel"
-            className="h-10 w-10 rounded-full"
+            className="h-12 w-12 object-contain"
           />
           <div className="hidden md:block">
             <span className="text-xl font-bold text-primary">Camtel</span>
@@ -103,7 +103,7 @@ export function DashboardHeader() {
                   onClick={() => setLanguage('en')}
                   className={
                     language === 'en'
-                      ? 'bg-secondary cursor-pointer'
+                      ? 'bg-secondary cursor-pointer mb-1'
                       : 'cursor-pointer'
                   }
                 >
@@ -113,7 +113,7 @@ export function DashboardHeader() {
                   onClick={() => setLanguage('fr')}
                   className={
                     language === 'fr'
-                      ? 'bg-secondary cursor-pointer'
+                      ? 'bg-secondary cursor-pointer mb-1'
                       : 'cursor-pointer'
                   }
                 >

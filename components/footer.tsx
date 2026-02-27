@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/lib/language-context';
+import Link from 'next/link';
 
 export function Footer() {
   const { t } = useLanguage();
@@ -15,10 +16,9 @@ export function Footer() {
             <img
               src="/camtel.png"
               alt="Camtel"
-              className="h-15 w-15 rounded-full"
+              className="h-15 w-15 object-contain"
             />
             <div>
-              <span className="font-semibold text-foreground">camtel</span>
               <span className="ml-2 text-xs text-muted-foreground">
                 {t('tagline')}
               </span>
@@ -27,12 +27,12 @@ export function Footer() {
 
           {/* links */}
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <a href="#" className="transition-colors hover:text-foreground">
+            <Link href="#" className="transition-colors hover:text-foreground">
               {t('privacyPolicy')}
-            </a>
-            <a href="#" className="transition-colors hover:text-foreground">
+            </Link>
+            <Link href="#" className="transition-colors hover:text-foreground">
               {t('termsOfService')}
-            </a>
+            </Link>
           </div>
         </div>
 
