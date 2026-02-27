@@ -10,13 +10,13 @@ export function Footer() {
     <footer className="border-t border-border/50 bg-card">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          {/* Logo and Tagline */}
+          {/* logo */}
           <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
-              <span className="text-sm font-bold text-primary-foreground">
-                C
-              </span>
-            </div>
+            <img
+              src="/camtel.png"
+              alt="Camtel"
+              className="h-15 w-15 rounded-full"
+            />
             <div>
               <span className="font-semibold text-foreground">camtel</span>
               <span className="ml-2 text-xs text-muted-foreground">
@@ -25,7 +25,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links */}
+          {/* links */}
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <a href="#" className="transition-colors hover:text-foreground">
               {t('privacyPolicy')}

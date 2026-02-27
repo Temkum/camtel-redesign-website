@@ -46,9 +46,11 @@ export function DashboardHeader() {
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
-            <Globe className="h-6 w-6 text-primary-foreground" />
-          </div>
+          <img
+            src="/camtel.png"
+            alt="Camtel"
+            className="h-10 w-10 rounded-full"
+          />
           <div className="hidden md:block">
             <span className="text-xl font-bold text-primary">Camtel</span>
             <p className="text-xs text-muted-foreground">

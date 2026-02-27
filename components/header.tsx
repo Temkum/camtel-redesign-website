@@ -31,9 +31,11 @@ export function Header() {
           href="/"
           className="flex items-center gap-2 transition-transform duration-200 hover:scale-105"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
-            <span className="text-lg font-bold text-primary-foreground">C</span>
-          </div>
+          <img
+            src="/camtel.png"
+            alt="Camtel"
+            className="h-10 w-10 rounded-full"
+          />
           <div className="flex flex-col">
             <span className="text-xl font-bold text-foreground">camtel</span>
             <span className="text-[10px] text-muted-foreground">
