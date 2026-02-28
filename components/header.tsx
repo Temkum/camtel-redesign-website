@@ -18,7 +18,7 @@ export function Header() {
   const { language, setLanguage, t } = useLanguage();
 
   const navItems = [
-    { key: 'home', href: '#' },
+    { key: 'dashboard', href: '/dashboard' },
     { key: 'products', href: '#products' },
     { key: 'services', href: '#services' },
     { key: 'support', href: '#contact' },

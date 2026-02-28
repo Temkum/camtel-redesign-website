@@ -29,7 +29,7 @@ import { useActivePath } from '@/hooks/use-active-path';
 import { useAuth } from '@/lib/auth-context';
 
 const navigation = [
-  { name: 'Home', href: '/dashboard', icon: Home },
+  { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Product', href: '/dashboard/services', icon: Package },
   { name: 'Service', href: '/dashboard/account', icon: Settings },
   { name: 'Support', href: '/dashboard/support', icon: HelpCircle },

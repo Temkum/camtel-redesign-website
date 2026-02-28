@@ -26,7 +26,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-export default function RegisterPage() {
+export default function Register() {
   const { register } = useAuth();
 
   const form = useForm<RegisterInput>({

@@ -1,131 +1,88 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { LoginInput } from '@/lib/validations/auth';
+/**
+ * lib/auth-context.tsx
+ *
+ * Replaces the old JWT-based context with Better Auth session management.
+ * useSession() from Better Auth handles polling/revalidation automatically.
+ *
+ * The old manual fetch to /api/auth/get-session, login, register, and logout
+ * are replaced by the Better Auth client methods.
+ */
 
-interface User {
-  id: string;
-  name: string;
-  serviceId: number;
-}
+import React, { createContext, useContext } from 'react';
+import { useSession, signOut, phoneNumber } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
-  user: User | null;
+  user: {
+    id: string;
+    name: string;
+    phoneNumber: string | null | undefined;
+    serviceId: string | null | undefined;
+  } | null;
+  session: ReturnType<typeof useSession>['data'];
   isLoading: boolean;
-  login: (credentials: LoginInput) => Promise<void>;
+  sendOtp: (phone: string) => Promise<{ error?: string }>;
+  verifyOtp: (phone: string, code: string) => Promise<{ error?: string }>;
   logout: () => Promise<void>;
-  register: (data: any) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+  const { data: session, isPending } = useSession();
 
-  useEffect(() => {
-    checkSession();
-  }, []);
-
-  const checkSession = async () => {
-    try {
-      const response = await fetch('/api/auth/get-session', {
-        credentials: 'include',
-      });
-      if (response.ok) {
-        const session = await response.json();
-        if (session?.user) {
-          setUser({
-            id: session.user.id,
-            name: session.user.name || session.user.email,
-            serviceId: session.user.serviceId,
-          });
-        }
+  const user = session?.user
+    ? {
+        id: session.user.id,
+        name: session.user.name,
+        // These fields come from the phoneNumber plugin & your custom schema
+        phoneNumber: (session.user as any).phoneNumber ?? null,
+        serviceId: (session.user as any).serviceId ?? null,
       }
-    } catch (error) {
-      console.error('Session check failed:', error);
-    } finally {
-      setIsLoading(false);
-    }
+    : null;
+
+  const sendOtp = async (phone: string): Promise<{ error?: string }> => {
+    const { error } = await phoneNumber.sendOtp({ phoneNumber: phone });
+    if (error) return { error: error.message };
+    return {};
   };
 
-  const login = async (credentials: LoginInput) => {
-    setIsLoading(true);
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          serviceId: credentials.serviceId,
-          password: credentials.password,
-        }),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Login failed');
-      }
-
-      await checkSession();
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const register = async (data: any) => {
-    setIsLoading(true);
-    try {
-      const response = await fetch('/api/auth/sign-up/email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password,
-          name: data.fullName,
-          serviceId: data.serviceId,
-        }),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Registration failed');
-      }
-
-      await checkSession();
-    } finally {
-      setIsLoading(false);
-    }
+  const verifyOtp = async (
+    phone: string,
+    code: string,
+  ): Promise<{ error?: string }> => {
+    const { error } = await phoneNumber.verify({ phoneNumber: phone, code });
+    if (error) return { error: error.message };
+    return {};
   };
 
   const logout = async () => {
-    try {
-      await fetch('/api/auth/sign-out', {
-        method: 'POST',
-        credentials: 'include',
-      });
-    } catch (error) {
-      console.error('Logout error:', error);
-    } finally {
-      setUser(null);
-      window.location.href = '/';
-    }
+    await signOut();
+    router.push('/');
+    router.refresh();
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout, register }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        session,
+        isLoading: isPending,
+        sendOtp,
+        verifyOtp,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 }
 
 export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth must be used within AuthProvider');
-  return context;
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error('useAuth must be used within AuthProvider');
+  return ctx;
 };

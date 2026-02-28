@@ -22,13 +22,13 @@ export async function POST(req: NextRequest) {
       // Check existing
       const existing = await client.query(
         'SELECT id FROM users WHERE service_id = $1 OR (email IS NOT NULL AND email = $2)',
-        [data.serviceId, data.email || null]
+        [data.serviceId, data.email || null],
       );
 
       if (existing) {
         return NextResponse.json(
           { message: 'Service ID or email already exists' },
-          { status: 400 }
+          { status: 400 },
         );
       }
 
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
       await client.query(
         'INSERT INTO users (service_id, email, name, password_hash) VALUES ($1, $2, $3, $4)',
-        [data.serviceId, data.email || null, data.fullName || null, hash]
+        [data.serviceId, data.email || null, data.fullName || null, hash],
       );
 
       return NextResponse.json({ message: 'User created' }, { status: 201 });
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
   } catch (e: any) {
     return NextResponse.json(
       { message: e.message || 'Failed' },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }
