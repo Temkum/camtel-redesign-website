@@ -26,12 +26,16 @@ export default function LoginPage() {
   // ---- Step 1: phone form ----
   const phoneForm = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
+    mode: 'onTouched', // validate on blur, not just submit
+    criteriaMode: 'firstError', // show only the first Zod error per field
     defaultValues: { phoneNumber: '' },
   });
 
   // ---- Step 2: OTP form ----
   const otpForm = useForm<OtpInput>({
     resolver: zodResolver(otpSchema),
+    mode: 'onTouched',
+    criteriaMode: 'firstError',
     defaultValues: { phoneNumber: '', code: '' },
   });
 

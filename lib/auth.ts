@@ -14,7 +14,7 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { phoneNumber } from 'better-auth/plugins';
-import { pgPool as db } from '@/lib/db';
+import { db } from '@/lib/db';
 import * as schema from '@/db/schema/auth-schema';
 
 export const auth = betterAuth({

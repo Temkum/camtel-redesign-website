@@ -1,19 +1,26 @@
 /**
  * lib/validations/auth.ts
  *
- * Zod schemas for all auth forms.
- * These run on the CLIENT before hitting the API.
- * The API also validates independently — never rely on client-only validation.
+ * Zod v4 compatible schemas.
+ *
+ * Key Zod v4 changes from v3:
+ * - z.string().regex() still works but chaining order matters less
+ * - Error codes changed: "invalid_string" -> "invalid_format"
+ * - z.email(), z.url() etc. are now first-class string formats
+ * - .min() on empty string still triggers, so we don't need a separate
+ *   .nonempty() — but message must be on .min(1)
+ *
+ * Requires: zod >= 3.25.0 (exports zod/v4/core used by @hookform/resolvers)
+ * Requires: @hookform/resolvers >= 5.0.1
  */
 
 import { z } from 'zod';
 
 // ---------------------------------------------------------------------------
-// Phone number — E.164 format required by most SMS providers
-// Cameroon numbers: +237 followed by 9 digits
-// The regex also accepts international numbers for flexibility.
+// Phone — E.164 format. Cameroon: +237 followed by 9 digits.
+// Defined as a standalone schema so it can be reused and tested in isolation.
 // ---------------------------------------------------------------------------
-const phoneSchema = z
+export const phoneSchema = z
   .string()
   .min(1, 'Phone number is required')
   .regex(
@@ -22,7 +29,7 @@ const phoneSchema = z
   );
 
 // ---------------------------------------------------------------------------
-// Login: phone number only (OTP flow — no password)
+// Login
 // ---------------------------------------------------------------------------
 export const loginSchema = z.object({
   phoneNumber: phoneSchema,
@@ -31,24 +38,29 @@ export const loginSchema = z.object({
 export type LoginInput = z.infer<typeof loginSchema>;
 
 // ---------------------------------------------------------------------------
-// OTP verification
+// OTP — validated separately from the phone step
 // ---------------------------------------------------------------------------
 export const otpSchema = z.object({
   phoneNumber: phoneSchema,
   code: z
     .string()
-    .length(6, 'OTP must be exactly 6 digits')
-    .regex(/^\d{6}$/, 'OTP must contain only digits'),
+    .min(1, 'Verification code is required')
+    .length(6, 'Code must be exactly 6 digits')
+    .regex(/^\d+$/, 'Code must contain only digits'),
 });
 
 export type OtpInput = z.infer<typeof otpSchema>;
 
 // ---------------------------------------------------------------------------
-// Registration: phone + email + name + service ID
+// Registration
 // ---------------------------------------------------------------------------
 export const registerSchema = z.object({
   phoneNumber: phoneSchema,
-  email: z.string().email('Enter a valid email address'),
+  // Zod v4: z.string().email() still works; z.email() also valid standalone
+  email: z
+    .string()
+    .min(1, 'Email is required')
+    .email('Enter a valid email address'),
   fullName: z
     .string()
     .min(2, 'Full name must be at least 2 characters')

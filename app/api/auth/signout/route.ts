@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server';
-import { clearSessionCookie } from '@/lib/auth';
 
 export async function POST() {
-  await clearSessionCookie();
-  return NextResponse.json({ message: 'Logged out' });
+  return NextResponse.json(
+    {
+      message:
+        'This endpoint has been replaced by Better Auth. Use /api/auth/[...all].',
+    },
+    { status: 410 },
+  );
 }

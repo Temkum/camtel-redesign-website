@@ -38,6 +38,8 @@ export default function RegisterPage() {
   // ---- Step 1: registration details ----
   const detailsForm = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
+    mode: 'onTouched',
+    criteriaMode: 'firstError',
     defaultValues: {
       phoneNumber: '',
       email: '',
@@ -49,6 +51,8 @@ export default function RegisterPage() {
   // ---- Step 2: OTP ----
   const otpForm = useForm<OtpInput>({
     resolver: zodResolver(otpSchema),
+    mode: 'onTouched',
+    criteriaMode: 'firstError',
     defaultValues: { phoneNumber: '', code: '' },
   });
 
