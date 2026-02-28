@@ -13,7 +13,6 @@ import {
   Satellite,
   Router,
   Wifi,
-  Package,
   ChevronRight,
   CreditCard,
   History,
