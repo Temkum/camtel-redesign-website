@@ -10,13 +10,15 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/lib/language-context';
+import { AuthButton } from '@/components/auth/auth-button';
+import Link from 'next/link';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
 
   const navItems = [
-    { key: 'home', href: '#' },
+    { key: 'dashboard', href: '/dashboard' },
     { key: 'products', href: '#products' },
     { key: 'services', href: '#services' },
     { key: 'support', href: '#contact' },
@@ -26,36 +28,41 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-card/80 backdrop-blur-xl transition-all duration-300">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <a
+        <Link
           href="/"
           className="flex items-center gap-2 transition-transform duration-200 hover:scale-105"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
-            <span className="text-lg font-bold text-primary-foreground">C</span>
-          </div>
+          <img
+            src="/camtel.png"
+            alt="Camtel"
+            className="h-10 w-10 rounded-full"
+          />
           <div className="flex flex-col">
             <span className="text-xl font-bold text-foreground">camtel</span>
             <span className="text-[10px] text-muted-foreground">
               {t('tagline')}
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.key}
               href={item.href}
               className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground"
             >
               {t(item.key)}
-            </a>
+            </Link>
           ))}
         </nav>
 
         {/* Right Section */}
         <div className="flex items-center gap-2">
+          {/* Auth Button */}
+          <AuthButton />
+
           {/* Language Switcher */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -114,14 +121,14 @@ export function Header() {
       >
         <nav className="flex flex-col gap-1 border-t border-border/40 bg-card px-4 py-4">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.key}
               href={item.href}
               className="rounded-lg px-4 py-3 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground"
               onClick={() => setMobileMenuOpen(false)}
             >
               {t(item.key)}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>

@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Wifi,
   Signal,
-  Zap,
   Laptop,
   Smartphone,
   Car,
@@ -31,7 +30,6 @@ export function HeroSection() {
           {/* Text Content */}
           <div className="animate-fade-in space-y-8">
             <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-              <Zap className="h-4 w-4" />
               <span>Camtel Telecommunications</span>
             </div>
 
@@ -54,7 +52,7 @@ export function HeroSection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-border px-8 transition-all duration-300 hover:border-primary hover:text-primary bg-transparent"
+                className="border-border px-8 transition-all duration-300 hover:border-primary hover:text-white bg-transparent"
               >
                 {t('contactUs')}
               </Button>
@@ -99,7 +97,7 @@ export function HeroSection() {
 
               {/* Center Icon */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent shadow-2xl shadow-primary/30">
+                <div className="flex h-32 w-32 items-center justify-center rounded-full bg-primary to-accent shadow-2xl shadow-primary/30">
                   <Wifi className="h-16 w-16 text-primary-foreground" />
                 </div>
               </div>
