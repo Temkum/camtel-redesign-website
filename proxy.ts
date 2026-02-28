@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSessionCookie } from 'better-auth/cookies';
 
 const PROTECTED = ['/dashboard'];
-const AUTH_ONLY = ['/login', '/register']; // redirect away if already signed in
+const AUTH_ONLY = ['/login', '/register'];
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
