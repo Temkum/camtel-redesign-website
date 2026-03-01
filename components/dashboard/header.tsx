@@ -23,6 +23,7 @@ import {
   Key,
   Globe,
   ChevronDown,
+  Rss,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 import { useActivePath } from '@/hooks/use-active-path';
@@ -30,8 +31,9 @@ import { useAuth } from '@/lib/auth-context';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
+  { name: 'Bundles', href: '/dashboard/bundle', icon: Rss },
   { name: 'Product', href: '/dashboard/services', icon: Package },
-  { name: 'Service', href: '/dashboard/account', icon: Settings },
+  { name: 'Account', href: '/dashboard/account', icon: Settings },
   { name: 'Support', href: '/dashboard/support', icon: HelpCircle },
 ];
 

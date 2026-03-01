@@ -66,16 +66,22 @@ const quickActions = [
     description: 'View your balance and account details',
   },
   {
-    name: 'Order History',
-    href: '/dashboard/orders',
-    icon: History,
-    description: 'Check your past orders',
+    name: 'Bundles',
+    href: '/dashboard/bundles',
+    icon: RefreshCw,
+    description: 'Subscribe to Data bundles',
   },
   {
     name: 'Recharge',
     href: '/dashboard/recharge',
     icon: RefreshCw,
     description: 'Top up your account',
+  },
+  {
+    name: 'Order History',
+    href: '/dashboard/orders',
+    icon: History,
+    description: 'Check your past orders',
   },
 ];
 
