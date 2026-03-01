@@ -136,14 +136,14 @@ export function DashboardHeader() {
                 <div className="px-3 py-2">
                   <p className="text-sm font-medium">{user.name}</p>
                   <p className="text-xs text-muted-foreground">
-                    Service: {user.serviceId}
+                    {user.phoneNumber}
                   </p>
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link href="/dashboard/account">
                     <User className="mr-2 h-4 w-4" />
-                    Customer Information
+                    Profile
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
@@ -179,7 +179,7 @@ export function DashboardHeader() {
                   <div className="px-2 py-4 border-b border-border">
                     <p className="font-medium">{user.name}</p>
                     <p className="text-sm text-muted-foreground">
-                      Service: {user.serviceId}
+                      Service: {user.phoneNumber}
                     </p>
                   </div>
                 ) : (

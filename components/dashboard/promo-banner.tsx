@@ -21,7 +21,7 @@ const promos = [
     price: '5,900',
     period: '/ 30 jours',
     icon: Smartphone,
-    gradient: 'from-blue-600 to-cyan-500',
+    gradient: 'from-blue-600 to-blue-500',
     highlight: '4G LTE',
   },
   {
@@ -31,7 +31,7 @@ const promos = [
     price: '19,900',
     period: '/ mois',
     icon: Globe,
-    gradient: 'from-emerald-600 to-teal-500',
+    gradient: 'from-blue-600 to-blue-500',
     highlight: 'FIBRE',
   },
   {
@@ -41,7 +41,7 @@ const promos = [
     price: '9,500',
     period: '/ mois',
     icon: Tv,
-    gradient: 'from-violet-600 to-purple-500',
+    gradient: 'from-blue-600 to-blue-500',
     highlight: 'NOUVEAU',
   },
 ];

@@ -27,7 +27,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // User Section
     welcome: 'Welcome',
-    customerInfo: 'Customer Information',
+    customerInfo: 'Profile',
     changePassword: 'Change Password',
     logout: 'Logout',
     notLoggedIn: 'Not Logged In',
