@@ -105,6 +105,30 @@ export default function DashboardPage() {
           </div>
         </div>
 
+        {/* Quick Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {quickActions.map((action) => (
+            <Card
+              key={action.name}
+              className="hover:shadow-md transition-shadow"
+            >
+              <Link href={action.href}>
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <action.icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <span className="font-semibold">{action.name}</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {action.description}
+                  </p>
+                </CardContent>
+              </Link>
+            </Card>
+          ))}
+        </div>
+
         {/* Service Highlights */}
         <ServiceHighlights />
 
@@ -184,30 +208,6 @@ export default function DashboardPage() {
                 </div>
               </CardContent>
             </Card>
-
-            {/* Quick Actions */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {quickActions.map((action) => (
-                <Card
-                  key={action.name}
-                  className="hover:shadow-md transition-shadow"
-                >
-                  <Link href={action.href}>
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                          <action.icon className="h-5 w-5 text-primary" />
-                        </div>
-                        <span className="font-semibold">{action.name}</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        {action.description}
-                      </p>
-                    </CardContent>
-                  </Link>
-                </Card>
-              ))}
-            </div>
           </div>
 
           {/* Right Sidebar */}

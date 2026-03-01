@@ -31,7 +31,7 @@ import { useAuth } from '@/lib/auth-context';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
-  { name: 'Bundles', href: '/dashboard/bundle', icon: Rss },
+  { name: 'Bundles', href: '/dashboard/bundles', icon: Rss },
   { name: 'Product', href: '/dashboard/services', icon: Package },
   { name: 'Account', href: '/dashboard/account', icon: Settings },
   { name: 'Support', href: '/dashboard/support', icon: HelpCircle },
