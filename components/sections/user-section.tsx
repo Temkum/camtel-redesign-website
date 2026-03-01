@@ -20,14 +20,7 @@ import LoginModal from '@/app/login-modal/page';
 export function UserSection() {
   const { t } = useLanguage();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const { user, login, logout, isLoading } = useAuth();
-
-  const loggedUser = { name: 'KUM JUDE THADDEUS TEM', service: '620779967' };
-
-  // Dummy data state - set to null to see "Not Logged In" state
-  // const [user, setUser] = useState<{ name: string; service: string } | null>(
-  //   null
-  // );
+  const { user, logout } = useAuth();
 
   const quickActions = [
     { icon: Receipt, label: 'viewBills', color: 'text-primary' },
@@ -52,10 +45,10 @@ export function UserSection() {
                       <div>
                         <p className="text-sm opacity-90">{t('welcome')},</p>
                         <CardTitle className="text-lg uppercase">
-                          {user.name}
+                          {user?.name}
                         </CardTitle>
                         <p className="text-xs opacity-80">
-                          Ref: {user.serviceId}
+                          Ref: {user?.phoneNumber}
                         </p>
                       </div>
                     </div>

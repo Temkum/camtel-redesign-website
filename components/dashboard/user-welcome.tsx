@@ -16,7 +16,7 @@ export function UserWelcome() {
           <div className="flex-1">
             <p className="text-sm opacity-80">Welcome,</p>
             <h2 className="text-lg font-bold">KUM JUDE THADDEUS TEM</h2>
-            <p className="text-sm opacity-80 mt-1">Service No: 620779967</p>
+            <p className="text-sm opacity-80 mt-1">620779967</p>
           </div>
         </div>
         <div className="mt-6 flex flex-col gap-2">
@@ -27,17 +27,7 @@ export function UserWelcome() {
           >
             <Link href="/dashboard/account">
               <User className="mr-2 h-4 w-4" />
-              Customer Information
-            </Link>
-          </Button>
-          <Button
-            variant="secondary"
-            className="w-full justify-start bg-primary-foreground/20 hover:bg-primary-foreground/30 text-primary-foreground"
-            asChild
-          >
-            <Link href="/dashboard/settings">
-              <Key className="mr-2 h-4 w-4" />
-              Change Password
+              Profile
             </Link>
           </Button>
           <Button

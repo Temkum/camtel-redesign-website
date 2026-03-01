@@ -131,7 +131,7 @@ const faqData = [
     id: 14,
     question: 'How do I update my account information?',
     answer:
-      "To update your account information, go to your profile settings by clicking on your name in the top right corner. Select 'Customer Information' to view and edit your personal details. Some changes may require verification.",
+      "To update your account information, go to your profile settings by clicking on your name in the top right corner. Select 'Profile' to view and edit your personal details. Some changes may require verification.",
     category: 'account',
   },
   {
